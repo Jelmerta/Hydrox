@@ -14,11 +14,10 @@ hydrox-utils = { path = "../hydrox-utils" }
 
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
 rodio = { version = "0.21", default-features = false, features = ["lewton", "playback"] } # less dependencies , wav->symphony uses old version of bitflags as well. symphonia is supposed to be faster?
-pollster = "0.4"
 
 [target.'cfg(target_arch = "wasm32")'.dependencies]
-wasm-bindgen = { version = "0.2", default-features = false }
-wasm-bindgen-futures = "0.4"
+#wasm-bindgen = { version = "0.2", default-features = false }
+#wasm-bindgen-futures = "0.4"
 rodio = { version = "0.21", default-features = false, features = ["lewton", "playback", "wasm-bindgen"] } # less dependencies , wav->symphony uses old version of bitflags as well. symphonia is supposed to be faster?
 #web-sys = { version = "0.3", features = [
 #    "AudioContext",
