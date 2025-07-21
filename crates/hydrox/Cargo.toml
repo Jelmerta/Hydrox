@@ -1,0 +1,13 @@
+[package]
+name = "hydrox"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+hydrox-audio = { path = "../hydrox-audio" }
+hydrox-ui = { path = "../hydrox-ui" }
+hydrox-core = { path = "../hydrox-core" }
+hydrox-graphics = { path = "../hydrox-graphics" }
+hydrox-input = { path = "../hydrox-input" }
+hydrox-ecs = { path = "../hydrox-ecs" }
+hydrox-utils = { path = "../hydrox-utils" }
