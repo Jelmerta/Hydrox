@@ -1,0 +1,11 @@
+[workspace]
+resolver = "3"
+members = [
+    "crates/hydrox-core",
+    "crates/hydrox-ecs",
+    "crates/hydrox-graphics",
+    "crates/hydrox-input",
+    "crates/hydrox-audio",
+    "crates/hydrox-ui",
+#    "crates/hydrox-utils",
+]

@@ -1,8 +1,0 @@
-C:\Users\Jelmer\RustroverProjects\Hatsu\hydro-engine\hydro-audio\target\wasm32-unknown-unknown\debug\deps\symphonia_format_riff-f40de70f2efacb77.d: C:\Users\Jelmer\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\symphonia-format-riff-0.5.4\src\lib.rs C:\Users\Jelmer\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\symphonia-format-riff-0.5.4\src\common.rs C:\Users\Jelmer\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\symphonia-format-riff-0.5.4\src\wave\mod.rs C:\Users\Jelmer\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\symphonia-format-riff-0.5.4\src\wave\chunks.rs
-
-C:\Users\Jelmer\RustroverProjects\Hatsu\hydro-engine\hydro-audio\target\wasm32-unknown-unknown\debug\deps\libsymphonia_format_riff-f40de70f2efacb77.rmeta: C:\Users\Jelmer\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\symphonia-format-riff-0.5.4\src\lib.rs C:\Users\Jelmer\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\symphonia-format-riff-0.5.4\src\common.rs C:\Users\Jelmer\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\symphonia-format-riff-0.5.4\src\wave\mod.rs C:\Users\Jelmer\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\symphonia-format-riff-0.5.4\src\wave\chunks.rs
-
-C:\Users\Jelmer\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\symphonia-format-riff-0.5.4\src\lib.rs:
-C:\Users\Jelmer\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\symphonia-format-riff-0.5.4\src\common.rs:
-C:\Users\Jelmer\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\symphonia-format-riff-0.5.4\src\wave\mod.rs:
-C:\Users\Jelmer\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\symphonia-format-riff-0.5.4\src\wave\chunks.rs:
