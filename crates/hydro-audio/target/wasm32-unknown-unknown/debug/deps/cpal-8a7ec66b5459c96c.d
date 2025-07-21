@@ -1,0 +1,11 @@
+C:\Users\Jelmer\RustroverProjects\Hatsu\hydro-engine\hydro-audio\target\wasm32-unknown-unknown\debug\deps\cpal-8a7ec66b5459c96c.d: C:\Users\Jelmer\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\cpal-0.16.0\src\lib.rs C:\Users\Jelmer\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\cpal-0.16.0\src\error.rs C:\Users\Jelmer\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\cpal-0.16.0\src\host\mod.rs C:\Users\Jelmer\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\cpal-0.16.0\src\host\null\mod.rs C:\Users\Jelmer\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\cpal-0.16.0\src\platform\mod.rs C:\Users\Jelmer\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\cpal-0.16.0\src\samples_formats.rs C:\Users\Jelmer\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\cpal-0.16.0\src\traits.rs
+
+C:\Users\Jelmer\RustroverProjects\Hatsu\hydro-engine\hydro-audio\target\wasm32-unknown-unknown\debug\deps\libcpal-8a7ec66b5459c96c.rmeta: C:\Users\Jelmer\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\cpal-0.16.0\src\lib.rs C:\Users\Jelmer\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\cpal-0.16.0\src\error.rs C:\Users\Jelmer\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\cpal-0.16.0\src\host\mod.rs C:\Users\Jelmer\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\cpal-0.16.0\src\host\null\mod.rs C:\Users\Jelmer\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\cpal-0.16.0\src\platform\mod.rs C:\Users\Jelmer\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\cpal-0.16.0\src\samples_formats.rs C:\Users\Jelmer\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\cpal-0.16.0\src\traits.rs
+
+C:\Users\Jelmer\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\cpal-0.16.0\src\lib.rs:
+C:\Users\Jelmer\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\cpal-0.16.0\src\error.rs:
+C:\Users\Jelmer\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\cpal-0.16.0\src\host\mod.rs:
+C:\Users\Jelmer\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\cpal-0.16.0\src\host\null\mod.rs:
+C:\Users\Jelmer\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\cpal-0.16.0\src\platform\mod.rs:
+C:\Users\Jelmer\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\cpal-0.16.0\src\samples_formats.rs:
+C:\Users\Jelmer\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\cpal-0.16.0\src\traits.rs:
