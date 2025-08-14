@@ -35,7 +35,7 @@ impl AudioSystem {
             // bytes: pollster::block_on(hydro_utils::load_binary("bonk.ogg")).unwrap(), // Is it really just this easy? what about other file formats? Need a decoder? https://github.com/eshaz/wasm-audio-decoders/tree/master? wav(or pcm) is raw. probably want to use flac if we want lossless compression (smaller files without fidelity loss). other formats SHOULD require decoding. though i think mp3 just worked...
 
             // #[cfg(target_arch = "wasm32")]
-            bytes: hydrox_utils::load_binary("bonk.ogg").await.unwrap(), // Is it really just this easy? what about other file formats? Need a decoder? https://github.com/eshaz/wasm-audio-decoders/tree/master? wav(or pcm) is raw. probably want to use flac if we want lossless compression (smaller files without fidelity loss). other formats SHOULD require decoding. though i think mp3 just worked..
+            bytes: hydrox_utils::load_binary("bonk.wav").await.unwrap(), // Is it really just this easy? what about other file formats? Need a decoder? https://github.com/eshaz/wasm-audio-decoders/tree/master? wav(or pcm) is raw. probably want to use flac if we want lossless compression (smaller files without fidelity loss). other formats SHOULD require decoding. though i think mp3 just worked..
         };
 
         let mut sounds = HashMap::new();
