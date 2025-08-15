@@ -6,6 +6,7 @@ edition = "2024"
 [dependencies]
 anyhow = { version = "1.0", default-features = false }
 
+#TODO default features false? why are these needed?
 [target.'cfg(target_arch = "wasm32")'.dependencies]
 reqwest = "0.12.22"
 web-sys = "0.3.77"
