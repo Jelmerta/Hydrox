@@ -1,6 +1,7 @@
 use std::env;
 use std::path::PathBuf;
 
+// TODO Calling code should retry?
 pub async fn load_binary(file_name: &str) -> anyhow::Result<Vec<u8>> {
     let path = env::var("OUT_DIR")
         .map(|out_dir| {

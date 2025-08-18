@@ -1,3 +1,4 @@
+// TODO Calling code should retry?
 pub async fn load_binary(file_name: &str) -> anyhow::Result<Vec<u8>> {
     let url = format_url(file_name);
     let data = reqwest::get(url)
