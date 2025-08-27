@@ -9,6 +9,7 @@ pub struct Sound {
 }
 
 pub struct AudioSystem {
+    is_active: bool,
     audio_player: AudioPlayer,
 }
 
@@ -17,11 +18,20 @@ impl AudioSystem {
         let sounds = Self::load_sounds();
 
         AudioSystem {
+            is_active: false,
             audio_player: AudioPlayer::new(sounds.await),
         }
     }
 
+    pub fn set_active(&mut self) {
+        self.is_active = true;
+    }
+
     pub fn play_sound(&mut self, sound: &str) {
+        if !self.is_active {
+            return
+        }
+
         if self.audio_player.is_playing(sound) {
             return;
         }
