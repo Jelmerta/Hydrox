@@ -9,24 +9,32 @@ pub struct Sound {
 }
 
 pub struct AudioSystem {
-    audio_player: AudioPlayer,
+    sounds: HashMap<String, Sound>,
+    audio_player: Option<AudioPlayer>,
 }
 
 impl AudioSystem {
     pub async fn new() -> Self {
-        let sounds = Self::load_sounds();
-
         AudioSystem {
-            audio_player: AudioPlayer::new(sounds.await),
+            sounds: Self::load_sounds().await,
+            audio_player: None,
         }
     }
 
+    pub async fn load_player(&mut self) {
+        self.audio_player = Some(AudioPlayer::new(&self.sounds))
+    }
+
     pub fn play_sound(&mut self, sound: &str) {
-        if self.audio_player.is_playing(sound) {
+        if self.audio_player.is_none() {
+            return;
+        }
+        let audio_player = self.audio_player.as_mut().expect("Audio player exists");
+        if audio_player.is_playing(sound) {
             return;
         }
 
-        self.audio_player.play_sound(sound);
+        audio_player.play_sound(sound);
     }
 
     async fn load_sounds() -> HashMap<String, Sound> {
@@ -54,7 +62,7 @@ struct AudioPlayer {
     audio_resources: HashMap<String, AudioResource>,
 }
 impl AudioPlayer {
-    pub fn new(sounds: HashMap<String, Sound>) -> Self {
+    pub fn new(sounds: &HashMap<String, Sound>) -> Self {
         let mut audio_resources = HashMap::new();
         let mut audio_stream = OutputStreamBuilder::open_default_stream().unwrap();
         audio_stream.log_on_drop(false);
@@ -62,10 +70,10 @@ impl AudioPlayer {
         for (sound_name, sound) in sounds {
             let sink = None;
             let audio_resource = AudioResource {
-                sound_bytes: sound,
+                sound_bytes: sound.clone(),
                 sink,
             };
-            audio_resources.insert(sound_name, audio_resource);
+            audio_resources.insert(sound_name.to_owned(), audio_resource);
         }
 
         AudioPlayer { audio_stream, audio_resources }
