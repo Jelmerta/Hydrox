@@ -9,13 +9,15 @@ pub struct Sound {
 }
 
 pub struct AudioSystem {
+    active_sounds: HashMap<String, Sound>,
     audio_player: AudioPlayer,
 }
 
 impl AudioSystem {
-    pub async fn new() -> Self {
+    pub fn new() -> Self {
         AudioSystem {
-            audio_player: AudioPlayer::new(&Self::load_sounds().await),
+            audio_player: AudioPlayer::new(),
+            active_sounds: HashMap::new(),
         }
     }
 
@@ -27,18 +29,29 @@ impl AudioSystem {
         self.audio_player.play_sound(sound);
     }
 
-    async fn load_sounds() -> HashMap<String, Sound> {
+    pub async fn load_sounds(&mut self) {
         let bonk_sound = Sound {
-            // #[cfg(not(target_arch = "wasm32"))]
-            // bytes: pollster::block_on(hydro_utils::load_binary("bonk.ogg")).unwrap(), // Is it really just this easy? what about other file formats? Need a decoder? https://github.com/eshaz/wasm-audio-decoders/tree/master? wav(or pcm) is raw. probably want to use flac if we want lossless compression (smaller files without fidelity loss). other formats SHOULD require decoding. though i think mp3 just worked...
-
-            // #[cfg(target_arch = "wasm32")]
-            bytes: hydrox_utils::load_binary("bonk.wav").await.unwrap(), // Is it really just this easy? what about other file formats? Need a decoder? https://github.com/eshaz/wasm-audio-decoders/tree/master? wav(or pcm) is raw. probably want to use flac if we want lossless compression (smaller files without fidelity loss). other formats SHOULD require decoding. though i think mp3 just worked..
+            bytes: hydrox_utils::load_binary("bonk.wav")
+                .await
+                .expect("Audio file should exist"), // Is it really just this easy? what about other file formats? Need a decoder? https://github.com/eshaz/wasm-audio-decoders/tree/master? wav(or pcm) is raw. probably want to use flac if we want lossless compression (smaller files without fidelity loss). other formats SHOULD require decoding. though i think mp3 just worked..
         };
 
         let mut sounds = HashMap::new();
         sounds.insert("bonk".to_string(), bonk_sound);
-        sounds
+        self.active_sounds = sounds;
+        self.audio_player.load_sounds(&self.active_sounds);
+    }
+
+    pub async fn load_sound(&mut self, sound_file: &str) {
+        let audio_binary = Sound {
+            bytes: hydrox_utils::load_binary(sound_file)
+                .await
+                .expect("Audio file should exist"),
+        };
+        let mut sounds = HashMap::new();
+        sounds.insert(sound_file.to_string(), audio_binary);
+        self.active_sounds = sounds;
+        self.audio_player.load_sounds(&self.active_sounds);
     }
 }
 
@@ -52,21 +65,28 @@ struct AudioPlayer {
     audio_resources: HashMap<String, AudioResource>,
 }
 impl AudioPlayer {
-    pub fn new(sounds: &HashMap<String, Sound>) -> Self {
-        let mut audio_resources = HashMap::new();
-        let mut audio_stream = OutputStreamBuilder::open_default_stream().expect("There should be an audio stream");
+    pub fn new() -> Self {
+        let audio_resources = HashMap::new();
+        let mut audio_stream =
+            OutputStreamBuilder::open_default_stream().expect("There should be an audio stream");
         audio_stream.log_on_drop(false);
 
+        AudioPlayer {
+            audio_stream,
+            audio_resources,
+        }
+    }
+
+    pub fn load_sounds(&mut self, sounds: &HashMap<String, Sound>) {
         for (sound_name, sound) in sounds {
             let sink = None;
             let audio_resource = AudioResource {
                 sound_bytes: sound.clone(),
                 sink,
             };
-            audio_resources.insert(sound_name.to_owned(), audio_resource);
+            self.audio_resources
+                .insert(sound_name.to_owned(), audio_resource);
         }
-
-        AudioPlayer { audio_stream, audio_resources }
     }
 
     pub fn is_playing(&self, sound: &str) -> bool {
