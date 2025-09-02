@@ -22,7 +22,7 @@ impl AudioSystem {
     }
 
     pub async fn load_player(&mut self) {
-        self.audio_player = Some(AudioPlayer::new(&self.sounds))
+        self.audio_player = Some(AudioPlayer::new(&self.sounds));
     }
 
     pub fn play_sound(&mut self, sound: &str) {
