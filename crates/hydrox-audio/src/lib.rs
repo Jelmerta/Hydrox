@@ -9,32 +9,22 @@ pub struct Sound {
 }
 
 pub struct AudioSystem {
-    sounds: HashMap<String, Sound>,
-    audio_player: Option<AudioPlayer>,
+    audio_player: AudioPlayer,
 }
 
 impl AudioSystem {
     pub async fn new() -> Self {
         AudioSystem {
-            sounds: Self::load_sounds().await,
-            audio_player: None,
+            audio_player: AudioPlayer::new(&Self::load_sounds().await),
         }
-    }
-
-    pub async fn load_player(&mut self) {
-        self.audio_player = Some(AudioPlayer::new(&self.sounds));
     }
 
     pub fn play_sound(&mut self, sound: &str) {
-        if self.audio_player.is_none() {
-            return;
-        }
-        let audio_player = self.audio_player.as_mut().expect("Audio player exists");
-        if audio_player.is_playing(sound) {
+        if self.audio_player.is_playing(sound) {
             return;
         }
 
-        audio_player.play_sound(sound);
+        self.audio_player.play_sound(sound);
     }
 
     async fn load_sounds() -> HashMap<String, Sound> {
@@ -64,7 +54,7 @@ struct AudioPlayer {
 impl AudioPlayer {
     pub fn new(sounds: &HashMap<String, Sound>) -> Self {
         let mut audio_resources = HashMap::new();
-        let mut audio_stream = OutputStreamBuilder::open_default_stream().unwrap();
+        let mut audio_stream = OutputStreamBuilder::open_default_stream().expect("There should be an audio stream");
         audio_stream.log_on_drop(false);
 
         for (sound_name, sound) in sounds {
