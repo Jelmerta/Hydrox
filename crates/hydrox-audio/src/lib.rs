@@ -5,7 +5,7 @@ use std::io::Cursor;
 
 #[derive(Clone)]
 pub struct Sound {
-    bytes: Vec<u8>,
+    pub bytes: Vec<u8>,
 }
 
 pub struct AudioSystem {
