@@ -42,15 +42,11 @@ impl AudioSystem {
         self.audio_player.load_sounds(&self.active_sounds);
     }
 
-    pub async fn load_sound(&mut self, sound_file: &str) {
-        let audio_binary = Sound {
-            bytes: hydrox_utils::load_binary(sound_file)
-                .await
-                .expect("Audio file should exist"),
-        };
-        let mut sounds = HashMap::new();
-        sounds.insert(sound_file.to_string(), audio_binary);
-        self.active_sounds = sounds;
+    pub fn load_sound(&mut self, sound_name: &str, sound: &Sound) {
+        // let mut sounds = HashMap::new();
+        // sounds.insert(sound_name, sound);
+        // self.active_sounds = sounds;
+        self.active_sounds.insert(sound_name.to_string(), sound.clone());
         self.audio_player.load_sounds(&self.active_sounds);
     }
 }
