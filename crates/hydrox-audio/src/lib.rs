@@ -10,15 +10,34 @@ pub struct Sound {
 
 pub struct AudioSystem {
     active_sounds: HashMap<String, Sound>,
-    audio_player: AudioPlayer,
+    audio_player: Option<AudioPlayer>,
+    is_loaded: bool,
 }
 
 impl AudioSystem {
     pub fn new() -> Self {
         AudioSystem {
-            audio_player: AudioPlayer::new(),
+            audio_player: Some(AudioPlayer::new()),
             active_sounds: HashMap::new(),
+            is_loaded: true,
         }
+    }
+
+    pub fn new_load_later() -> Self {
+        AudioSystem {
+            audio_player: None,
+            active_sounds: HashMap::new(),
+            is_loaded: false,
+        }
+    }
+
+    pub fn load(&mut self) {
+        if self.is_loaded {
+            panic!("Audio system is already loaded");
+        }
+
+        self.audio_player = Some(AudioPlayer::new());
+        self.is_loaded = true;
     }
 
     pub fn play_sound(&mut self, sound: &str) {
