@@ -41,14 +41,22 @@ impl AudioSystem {
     }
 
     pub fn play_sound(&mut self, sound: &str) {
-        if self.audio_player.is_playing(sound) {
+        if !self.is_loaded {
+            panic!("Audio system is not loaded");
+        }
+        let audio_player = self.audio_player.as_mut().expect("audio player should be available when playing sounds");
+
+            if audio_player.is_playing(sound) {
             return;
         }
 
-        self.audio_player.play_sound(sound);
+        audio_player.play_sound(sound);
     }
 
     pub async fn load_sounds(&mut self) {
+        if !self.is_loaded {
+            panic!("Audio system is not loaded");
+        }
         let bonk_sound = Sound {
             bytes: hydrox_utils::load_binary("bonk.wav")
                 .await
@@ -58,15 +66,18 @@ impl AudioSystem {
         let mut sounds = HashMap::new();
         sounds.insert("bonk".to_string(), bonk_sound);
         self.active_sounds = sounds;
-        self.audio_player.load_sounds(&self.active_sounds);
+        self.audio_player.as_mut().expect("audio player should be available when loading sounds").load_sounds(&self.active_sounds); // TODO not really true? i mean we can load this even before gesture assuming audio files have loaded?
     }
 
     pub fn load_sound(&mut self, sound_name: &str, sound: &Sound) {
         // let mut sounds = HashMap::new();
         // sounds.insert(sound_name, sound);
         // self.active_sounds = sounds;
+        if !self.is_loaded {
+            panic!("Audio system is not loaded");
+        }
         self.active_sounds.insert(sound_name.to_string(), sound.clone());
-        self.audio_player.load_sounds(&self.active_sounds);
+        self.audio_player.as_mut().expect("audio player should be available when loading sounds").load_sounds(&self.active_sounds);
     }
 }
 
