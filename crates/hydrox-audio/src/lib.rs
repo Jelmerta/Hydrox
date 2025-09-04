@@ -34,7 +34,8 @@ impl AudioSystem {
 
     pub fn load(&mut self) {
         if self.is_loaded {
-            panic!("Audio system is already loaded");
+            // No action needed
+            return;
         }
 
         self.audio_player = Some(AudioPlayer::new());
