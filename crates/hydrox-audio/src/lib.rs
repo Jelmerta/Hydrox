@@ -65,17 +65,12 @@ impl AudioSystem {
     pub fn load_sound(&mut self, sound_name: &str, sound: &Sound) {
         self.active_sounds
             .insert(sound_name.to_string(), sound.clone());
-        self.audio_player.as_mut().unwrap().load_sound(&sound);
     }
-}
-
-struct AudioResource {
-    sink: Option<Sink>,
 }
 
 struct AudioPlayer {
     audio_stream: OutputStream,
-    audio_resources: HashMap<String, AudioResource>,
+    audio_resources: HashMap<String, Sink>,
 }
 impl AudioPlayer {
     pub fn new() -> Self {
@@ -90,26 +85,20 @@ impl AudioPlayer {
         }
     }
 
-    pub fn load_sound(&mut self, sound: &Sound) {
-        let audio_resource = AudioResource {
-            // sound_bytes: sound.clone(),
-            sink: None,
-        };
-        self.audio_resources
-            .insert(sound.name.to_owned(), audio_resource);
-    }
-
-    pub fn is_playing(&self, sound: &str) -> bool {
+    fn is_playing(&self, sound: &str) -> bool {
         let audio_resource = self.audio_resources.get(sound);
         audio_resource.is_some()
-            && audio_resource.unwrap().sink.is_some()
-            && !audio_resource.unwrap().sink.as_ref().unwrap().empty()
+            && !audio_resource.expect("audio resource exists").empty()
     }
 
     pub fn play_sound(&mut self, sound: &Sound) {
-        let audio_resource = self.audio_resources.get_mut(&sound.name).unwrap();
+        if self.is_playing(sound.name.as_str()) {
+            return;
+        }
+
         let audio_cursor = Cursor::new(sound.bytes.clone());
-        let sink = rodio::play(self.audio_stream.mixer(), audio_cursor);
-        audio_resource.sink = Some(sink.unwrap());
+        let sink = rodio::play(self.audio_stream.mixer(), audio_cursor).expect("Sink just created");
+        self.audio_resources.insert(sound.name.clone(), sink);
+        // TODO is it possible to close sink after having played?
     }
 }
